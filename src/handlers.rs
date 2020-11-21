@@ -1,4 +1,12 @@
-use actix_web::Responder;
+use super::models::{NewUser, User};
+use super::schema::users::dsl::*;
+use super::Pool;
+use crate::diesel::QueryDsl;
+use crate::diesel::RunQueryDsl;
+use actix_web::{web, Error, HttpResponse, Responder};
+use diesel::dsl::{delete, insert_into};
+use serde::{Deserialize, Serialize};
+use std::vec::Vec;
 
 pub async fn get_users() -> impl Responder {
     format!("hello from get users")
