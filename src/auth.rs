@@ -24,3 +24,10 @@ pub fn validate_token(token: &str) -> Result<bool, ServiceError> {
 
     Ok(res.is_ok())
 }
+
+fn fetch_jwks(uri: &str) -> Result<JWKS, Box<dyn Error>> {
+    let mut res = reqwest::get(uri)?;
+    let val = res.json::<JWKS>()?;
+
+    return Ok(val);
+}
